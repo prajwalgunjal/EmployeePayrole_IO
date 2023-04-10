@@ -8,6 +8,6 @@ public interface PayrollService {
     void writeData(List<EmployeePayrollData> list) throws IOException;
     void readData() throws IOException;
 
-    long count();
+    long count() throws IOException;
 
 }

@@ -40,6 +40,24 @@ public class EmployeePayrollService {
         }
         payrollService.readData();
     }
+    public Long CountEntries(IO_Service ioType) {
+        PayrollService payrollService;
+        if(IO_Service.FILE_IO.equals(ioType)){
+            payrollService=new FileIOImpl();
+        } else if (IO_Service.CONSOLE_IO.equals(ioType)) {
+            payrollService=new ConsoleIOImpl();
+        } else if (IO_Service.CLOUD_IO.equals(ioType)) {
+            payrollService= new CloudIOImpl();
+        }else {
+            payrollService=new DatabaseIOImpl();
+        }
+        try {
+            return payrollService.count();
+        } catch (IOException e) {
+            System.out.println("Catch block");
+        }
+        return null;
+    }
 
     public void read(){
         Scanner sc = new Scanner(System.in);
@@ -51,6 +69,7 @@ public class EmployeePayrollService {
         double salary=sc.nextDouble();
         employeePayrollList.add(new EmployeePayrollData(id,name,salary));
     }
+
     public void write(){
         System.out.println(employeePayrollList);
     }
@@ -61,4 +80,6 @@ public class EmployeePayrollService {
         employeePayrollService.read();
         employeePayrollService.write();
     }
+
+
 }

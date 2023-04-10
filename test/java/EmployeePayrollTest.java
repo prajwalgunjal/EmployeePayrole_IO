@@ -4,6 +4,7 @@ import com.bridgelabz.FileUtils;
 import com.bridgelabz.IO_Service;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -65,6 +66,9 @@ public class EmployeePayrollTest {
         EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollData);
         employeePayrollService.writeData(IO_Service.FILE_IO);
         employeePayrollService.readData(IO_Service.FILE_IO);
-
+        long count=employeePayrollService.CountEntries(IO_Service.FILE_IO);
+        System.out.println("Total Count is :- " +count);
+        Assertions.assertEquals(5,count);
     }
+
 }

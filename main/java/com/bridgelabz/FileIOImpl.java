@@ -26,7 +26,8 @@ public class FileIOImpl implements PayrollService {
     }
 
     @Override
-    public long count() {
-        return 0;
+    public long count() throws IOException {
+        String path = "C:\\Users\\prajw\\IdeaProjects\\EmployeePayroll\\src\\main\\java\\com\\bridgelabz\\data.txt";
+        return Files.lines(Path.of(path)).count();
     }
 }
