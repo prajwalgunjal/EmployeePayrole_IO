@@ -20,6 +20,8 @@ public class FileIOImpl implements PayrollService {
 
     @Override
     public void readData() throws IOException {
+        String path = "C:\\Users\\prajw\\IdeaProjects\\EmployeePayroll\\src\\main\\java\\com\\bridgelabz\\data.txt";
+        Files.lines(Path.of(path)).forEach(System.out::println);
 
     }
 

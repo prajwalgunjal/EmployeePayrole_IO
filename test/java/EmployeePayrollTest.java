@@ -64,6 +64,7 @@ public class EmployeePayrollTest {
         employeePayrollData.add(emp5);
         EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollData);
         employeePayrollService.writeData(IO_Service.FILE_IO);
+        employeePayrollService.readData(IO_Service.FILE_IO);
 
     }
 }
