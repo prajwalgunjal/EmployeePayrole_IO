@@ -1,14 +1,44 @@
 package com.bridgelabz;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class EmployeePayrollService {
 
 
-    ArrayList<EmployeePayrollData> employeePayrollList;
+    List<EmployeePayrollData> employeePayrollList;
 
-    public EmployeePayrollService(ArrayList<EmployeePayrollData> employeePayrollList) {
-        this.employeePayrollList=employeePayrollList;
+    public EmployeePayrollService(List<EmployeePayrollData> list) {
+        this.employeePayrollList=list;
+    }
+
+    public void writeData(IO_Service ioType) throws IOException {
+        PayrollService payrollService;
+        if(IO_Service.FILE_IO.equals(ioType)){
+            payrollService=new FileIOImpl();
+        } else if (IO_Service.CONSOLE_IO.equals(ioType)) {
+            payrollService=new ConsoleIOImpl();
+        } else if (IO_Service.CLOUD_IO.equals(ioType)) {
+            payrollService= new CloudIOImpl();
+        }else {
+            payrollService=new DatabaseIOImpl();
+        }
+        payrollService.writeData(employeePayrollList);
+    }
+
+    public void readData(IO_Service ioType) throws IOException {
+        PayrollService payrollService;
+        if(IO_Service.FILE_IO.equals(ioType)){
+            payrollService=new FileIOImpl();
+        } else if (IO_Service.CONSOLE_IO.equals(ioType)) {
+            payrollService=new ConsoleIOImpl();
+        } else if (IO_Service.CLOUD_IO.equals(ioType)) {
+            payrollService= new CloudIOImpl();
+        }else {
+            payrollService=new DatabaseIOImpl();
+        }
+        payrollService.readData();
     }
 
     public void read(){
@@ -26,7 +56,7 @@ public class EmployeePayrollService {
     }
 
     public static void main(String[] args) {
-         ArrayList<EmployeePayrollData> employeePayrollList= new ArrayList<>();
+         List<EmployeePayrollData> employeePayrollList= new ArrayList<>();
          EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
         employeePayrollService.read();
         employeePayrollService.write();
